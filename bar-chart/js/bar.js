@@ -1,5 +1,5 @@
-//var url = "data/small.json";
-var url = "data/commit.json";
+var url = "data/small.json";
+//var url = "data/commit.json";
 d3.json(url, makeChart);
 
 //var x = d3.scale.linear().domain([0, d3.max(data)]).range([0, width]);
@@ -17,9 +17,9 @@ function makeChart(commitJSON) {
     dataArray.reverse();
     dataKeyVal.reverse();
 
-    var margin = {top: 20, right: 30, bottom: 30, left: 40};
+    var margin = {top: 20, right: 30, bottom: 80, left: 40};
     var width = 900 - margin.left - margin.right;
-    var height = 300 - margin.top - margin.bottom;
+    var height = 500 - margin.top - margin.bottom;
     var barWidth  = width / dataKeyVal.length;
 
 
@@ -48,7 +48,7 @@ function makeChart(commitJSON) {
     bar.append("rect")
         .attr("y", function(d) { return y(d.amount); })
         .attr("height", function(d) { return height - y(d.amount); })
-        .attr("width", barWidth - 1);
+        .attr("width", barWidth - 3); // 1 + 2: 1 is the gap, and 2 is the rect stroke width
 
     bar.append("text")
         .attr("x", barWidth / 2)
@@ -70,7 +70,7 @@ function makeChart(commitJSON) {
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
             .attr("dy", ".71em")
-            .attr("transform", function(d) {return "rotate(-90)"});
+            .attr("transform", function(d) {return "rotate(-65)"});
 
     var yAxis = d3.svg.axis()
         .scale(y)
